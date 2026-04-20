@@ -1,9 +1,12 @@
-# comment
-   .*
-   Dockerfile*
-   docker_golang_1.8/*
-   LICENSE*
-   README.md
-   logo.jpg
-   public/assets/images/*
+.*
+!.env.example
+!.gitignore
 
+docker-compose.yml
+docker/
+
+coverage.txt
+*.out
+*.test
+debug
+ptt-alertor

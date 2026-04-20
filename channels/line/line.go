@@ -24,8 +24,16 @@ var (
 	bot                *linebot.Client
 	err                error
 	channelSecret      = os.Getenv("LINE_CHANNEL_SECRET")
-	channelAccessToken = os.Getenv("LINE_CHANNEL_ACCESSTOKEN")
+	channelAccessToken = getLineChannelAccessToken()
 )
+
+func getLineChannelAccessToken() string {
+	token := os.Getenv("LINE_CHANNEL_ACCESSTOKEN")
+	if token != "" {
+		return token
+	}
+	return os.Getenv("LINE_CHANNEL_ACCESS_TOKEN")
+}
 
 func init() {
 	bot, err = linebot.New(channelSecret, channelAccessToken)

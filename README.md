@@ -9,6 +9,33 @@
 [![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/ptt-alertor/ptt-alertor)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+## Docker Deployment
+
+1. (Optional) copy env template if you want to customize settings:
+
+```bash
+cp .env.example .env
+```
+
+2. Update `.env` if you need real channel tokens / secrets.
+
+3. Start all services (app + redis + dynamodb-local):
+
+```bash
+docker compose up --build -d
+```
+
+4. Open app:
+
+- http://localhost:9090
+- docs page: http://localhost:9090/docs
+
+5. Stop services:
+
+```bash
+docker compose down
+```
+
 ## API
 
 ### Board
