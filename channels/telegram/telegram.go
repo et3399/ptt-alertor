@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strings"
 
 	log "github.com/Ptt-Alertor/logrus"
 
@@ -25,24 +26,41 @@ var (
 )
 
 func init() {
+	if token == "" {
+		log.Warn("Telegram token is empty, telegram channel disabled")
+		return
+	}
+
 	bot, err = tgbotapi.NewBotAPI(token)
 	if err != nil {
-		log.WithError(err).Fatal("Telegram Bot Initialize Failed")
+		log.WithError(err).Warn("Telegram Bot Initialize Failed, telegram channel disabled")
+		return
 	}
 	// bot.Debug = true
 	log.Info("Telegram Authorized on " + bot.Self.UserName)
+
+	if !strings.HasPrefix(strings.ToLower(host), "https://") {
+		log.WithField("APP_HOST", host).Warn("Skip Telegram webhook setup: APP_HOST must be https")
+		return
+	}
 
 	webhookConfig := tgbotapi.NewWebhook(host + "/telegram/" + token)
 	webhookConfig.MaxConnections = 100
 	_, err = bot.SetWebhook(webhookConfig)
 	if err != nil {
-		log.WithError(err).Fatal("Telegram Bot Set Webhook Failed")
+		log.WithError(err).Warn("Telegram Bot Set Webhook Failed, continue without webhook")
+		return
 	}
 	log.Info("Telegram Bot Sets Webhook Success")
 }
 
 // HandleRequest handles request from webhook
 func HandleRequest(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	if bot == nil {
+		http.Error(w, "telegram channel disabled", http.StatusServiceUnavailable)
+		return
+	}
+
 	bytes, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.WithError(err).Error("Telegram Read Request Body Failed")
@@ -154,6 +172,10 @@ func SendTextMessage(chatID int64, text string) {
 }
 
 func sendTextMessage(chatID int64, text string) {
+	if bot == nil {
+		return
+	}
+
 	msg := tgbotapi.NewMessage(chatID, text)
 	msg.DisableWebPagePreview = true
 	_, err := bot.Send(msg)
@@ -163,6 +185,10 @@ func sendTextMessage(chatID int64, text string) {
 }
 
 func showReplyKeyboard(chatID int64) {
+	if bot == nil {
+		return
+	}
+
 	keyboard := tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("清單"),
@@ -179,6 +205,10 @@ func showReplyKeyboard(chatID int64) {
 }
 
 func hideReplyKeyboard(chatID int64) {
+	if bot == nil {
+		return
+	}
+
 	msg := tgbotapi.NewMessage(chatID, "隱藏小鍵盤")
 	msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
 	_, err := bot.Send(msg)

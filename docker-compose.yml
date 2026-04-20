@@ -57,6 +57,8 @@ services:
     env_file:
       - .env
     environment:
+      DB_CONNECTION: ${DB_CONNECTION:-http://dynamodb-local:8000}
+      AWS_REGION: ${AWS_REGION:-us-west-2}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-local}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-local}
     depends_on:

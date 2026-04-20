@@ -36,13 +36,23 @@ func getLineChannelAccessToken() string {
 }
 
 func init() {
+	if channelSecret == "" || channelAccessToken == "" {
+		log.Warn("LINE channel credentials are empty, line channel disabled")
+		return
+	}
+
 	bot, err = linebot.New(channelSecret, channelAccessToken)
 	if err != nil {
-		log.Fatal(err)
+		log.WithError(err).Warn("LINE channel init failed, line channel disabled")
+		return
 	}
 }
 
 func HandleRequest(_ http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	if bot == nil {
+		return
+	}
+
 	events, err := bot.ParseRequest(r)
 	if err != nil {
 		log.WithError(err).Error("Line ParseRequest Error")
@@ -96,6 +106,10 @@ func handleMessage(event *linebot.Event) {
 }
 
 func handleFollowAndJoin(event *linebot.Event) {
+	if bot == nil {
+		return
+	}
+
 	// TODO: make all user naming change to account
 	// account will include group, room and user and make accountType as enum
 	accountID, accountType := getAccountIDAndType(event)
@@ -177,6 +191,10 @@ func getAccountIDAndType(event *linebot.Event) (id, accountType string) {
 }
 
 func PushTextMessage(id string, message string) {
+	if bot == nil {
+		return
+	}
+
 	_, err := bot.PushMessage(id, linebot.NewTextMessage(message)).Do()
 	if err != nil {
 		log.WithError(err).Error("Line Push Message Failed")
@@ -197,6 +215,10 @@ func genConfirmMessage(command string) *linebot.TemplateMessage {
 }
 
 func replyMessage(token string, message ...linebot.SendingMessage) {
+	if bot == nil {
+		return
+	}
+
 	_, err := bot.ReplyMessage(token, message...).Do()
 	if err != nil {
 		log.WithError(err).Error("Line Reply Message Failed")
@@ -204,6 +226,10 @@ func replyMessage(token string, message ...linebot.SendingMessage) {
 }
 
 func BroadcastTextMessage(ids []string, message string) {
+	if bot == nil {
+		return
+	}
+
 	_, err := bot.Multicast(ids, linebot.NewTextMessage(message)).Do()
 	if err != nil {
 		log.WithError(err).Error("Line Broadcast Message Failed")

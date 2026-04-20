@@ -16,7 +16,7 @@
         </a>
     </p>
     <p>
-        此為伺服器擁有者 sating00 自架版本，僅留下我需要的 Line Notify 功能，若有安全有疑慮請立即停止使用，本人無法擔保此服務會永遠運作。 
+        此為伺服器擁有者 TiâuÛi 自架版本，若有安全有疑慮請立即停止使用，本人無法擔保此服務會永遠運作。 
     </p>
     <p>
         Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from
