@@ -3,11 +3,11 @@ package user
 type Mock struct{}
 
 func (Mock) List() (accounts []string) {
-	return []string{"dinos80152@gmail.com"}
+	return []string{"admin@tiaui.co"}
 }
 
 func (Mock) Exist(account string) bool {
-	if account == "dinos80152@gmail.com" {
+	if account == "admin@tiaui.co" {
 		return true
 	}
 	return false
@@ -22,6 +22,6 @@ func (Mock) Update(account string, user interface{}) error {
 }
 
 func (Mock) Find(account string, user *User) {
-	user.Profile.Account = "dinos80152@gmail.com"
+	user.Profile.Account = "admin@tiaui.co"
 	return
 }

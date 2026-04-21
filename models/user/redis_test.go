@@ -36,14 +36,14 @@ func TestMain(m *testing.M) {
 }
 
 func TestRedis_List(t *testing.T) {
-	s.Set("user:dinos80152", `{"account":"dinos80152"}`)
+	s.Set("user:admin", `{"account":"admin"}`)
 
 	tests := []struct {
 		name         string
 		r            Redis
 		wantAccounts []string
 	}{
-		{"dinos80152", Redis{}, []string{"dinos80152"}},
+		{"admin", Redis{}, []string{"admin"}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -55,7 +55,7 @@ func TestRedis_List(t *testing.T) {
 }
 
 func TestRedis_Exist(t *testing.T) {
-	s.Set("user:dinos80152", `{"account":"dinos80152"}`)
+	s.Set("user:admin", `{"account":"admin"}`)
 
 	type args struct {
 		account string
@@ -66,7 +66,7 @@ func TestRedis_Exist(t *testing.T) {
 		args args
 		want bool
 	}{
-		{"dinos80152", Redis{}, args{"dinos80152"}, true},
+		{"admin", Redis{}, args{"admin"}, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -88,7 +88,7 @@ func TestRedis_Save(t *testing.T) {
 		args    args
 		wantErr bool
 	}{
-		{"ok", Redis{}, args{"dinos80152", `{"account":"dinos80152"}`}, false},
+		{"ok", Redis{}, args{"admin", `{"account":"admin"}`}, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -110,10 +110,10 @@ func TestRedis_Update(t *testing.T) {
 		args    args
 		wantErr bool
 	}{
-		{"ok", Redis{}, args{"dinos80152", User{
+		{"ok", Redis{}, args{"admin", User{
 			Enable: true,
 			Profile: Profile{
-				Account: "dinos80152",
+				Account: "admin",
 			}}}, false},
 	}
 	for _, tt := range tests {
@@ -135,7 +135,7 @@ func TestRedis_Find(t *testing.T) {
 		r    Redis
 		args args
 	}{
-		{"ok", Redis{}, args{"dinos80152", &User{}}},
+		{"ok", Redis{}, args{"admin", &User{}}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

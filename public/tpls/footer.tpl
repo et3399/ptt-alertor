@@ -11,7 +11,7 @@
         <a class="fa-icon" target="_blank" href="https://github.com/watain666/ptt-alertor">
             <i class="fa fa-github fa-2x" aria-hidden="true"></i>
         </a>
-        <a class="fa-icon" target="_top" href="mailto:dinos80152@gmail.com">
+        <a class="fa-icon" target="_top" href="mailto:admin@tiaui.co">
             <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
         </a>
     </p>

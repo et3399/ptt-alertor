@@ -12,7 +12,7 @@ func TestUser_All(t *testing.T) {
 		wantUs []*User
 	}{
 		{"ok", User{drive: new(Mock)}, []*User{
-			&User{Profile: Profile{Account: "dinos80152@gmail.com"}, drive: new(Mock)},
+			{Profile: Profile{Account: "admin@tiaui.co"}, drive: new(Mock)},
 		}},
 	}
 	for _, tt := range tests {
@@ -31,8 +31,8 @@ func TestUser_Save(t *testing.T) {
 		wantErr bool
 	}{
 		{"ok", User{Profile: Profile{Account: "liam.lai@gmail.com", Email: "liam.lai@gmail.com"}, drive: new(Mock)}, false},
-		{"duplicate", User{Profile: Profile{Account: "dinos80152@gmail.com", Email: "dinos80152@gmail.com"}, drive: new(Mock)}, true},
-		{"not enough data", User{Profile: Profile{Account: "dinos80152@gmail.com"}, drive: new(Mock)}, true},
+		{"duplicate", User{Profile: Profile{Account: "admin@tiaui.co", Email: "admin@tiaui.co"}, drive: new(Mock)}, true},
+		{"not enough data", User{Profile: Profile{Account: "admin@tiaui.co"}, drive: new(Mock)}, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -49,7 +49,7 @@ func TestUser_Update(t *testing.T) {
 		u       User
 		wantErr bool
 	}{
-		{"ok", User{Profile: Profile{Account: "dinos80152@gmail.com"}, drive: new(Mock)}, false},
+		{"ok", User{Profile: Profile{Account: "admin@tiaui.co"}, drive: new(Mock)}, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -70,8 +70,8 @@ func TestUser_Find(t *testing.T) {
 		args args
 		want User
 	}{
-		{"ok", User{drive: new(Mock)}, args{"dinos80152@gmail.com"},
-			User{Profile: Profile{Account: "dinos80152@gmail.com"}, drive: new(Mock)}},
+		{"ok", User{drive: new(Mock)}, args{"admin@tiaui.co"},
+			User{Profile: Profile{Account: "admin@tiaui.co"}, drive: new(Mock)}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
