@@ -294,21 +294,21 @@
 
     ; 推文
     ; 新增推文
-    Send, 新增推文 https://www.ptt.cc/bbs/EZsoft/M.1497363598.A.74E.html{Enter}
+    Send, 新增推文 https://www.ptt.cc/bbs/EZsoft/M.1708247900.A.27C.html{Enter}
     Sleep, 1500
 
     ; 新增反面
     Send, 新增推文 www.ptt.cc/bbs/EZsoft/M.1497363598.A.74E.html{Enter}
     Sleep, 1500
 
-    Send, 新增推文 https://www.ptt.cc/bbs/EZsoft/M.1497363598.A.74E.html 賣，買{Enter}
+    Send, 新增推文 https://www.ptt.cc/bbs/EZsoft/M.1708247900.A.27C.html 賣，買{Enter}
     Sleep, 1500
 
     Send, 推文清單{Enter}
     Sleep, 1500
 
     ; 刪除推文
-    Send, 刪除推文 https://www.ptt.cc/bbs/EZsoft/M.1497363598.A.74E.html{Enter}
+    Send, 刪除推文 https://www.ptt.cc/bbs/EZsoft/M.1708247900.A.27C.html{Enter}
     Sleep, 1500
 
     Send, 推文清單{Enter}

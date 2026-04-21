@@ -25,7 +25,7 @@
 
     <h3>推文追蹤</h3>
     <ul class="list-disc">
-        <li><code>新增推文 https://www.ptt.cc/bbs/EZsoft/M.1497363598.A.74E.html</code></li>
+        <li><code>新增推文 https://www.ptt.cc/bbs/EZsoft/M.1708247900.A.27C.html</code></li>
     </ul>
 
     <h3>一般</h3>

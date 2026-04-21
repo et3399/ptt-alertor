@@ -5,7 +5,7 @@
         <a class="fa-icon" target="_blank" href="https://facebook.com/pttalertor">
             <i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
         </a>
-        <a class="fa-icon" target="_blank" href="https://www.ptt.cc/bbs/EZsoft/M.1497363598.A.74E.html">
+        <a class="fa-icon" target="_blank" href="https://www.ptt.cc/bbs/EZsoft/M.1708247900.A.27C.html">
             <i class="fa fa-product-hunt fa-2x" aria-hidden="true"></i>
         </a>
         <a class="fa-icon" target="_blank" href="https://github.com/watain666/ptt-alertor">

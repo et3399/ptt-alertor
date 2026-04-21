@@ -21,7 +21,7 @@ https://media.giphy.com/media/l0Iy28oboQbSw6Cn6/giphy.gif
 粉絲團：http://facebook.com/pttalertor
 
 #1PF_IETE (EZsoft)
-https://www.ptt.cc/bbs/EZsoft/M.1497363598.A.74E.html
+https://www.ptt.cc/bbs/EZsoft/M.1708247900.A.27C.html
 
 使用範例：
 
@@ -56,10 +56,10 @@ https://www.ptt.cc/bbs/EZsoft/M.1497363598.A.74E.html
 3. 推文數歸零即不通知：新增推文數 getmarry 0
 4. 推文追蹤因 Ptt 網頁版更新速度，5-10 分鐘通知一次。
 
-
 若想知道此工具更多使用方法與最新消息，我會在 #1PF_IETE (EZsoft) 持續更新。
 
 若有問題與建議麻煩推文或是粉絲團留言，希望能幫助到大家，謝謝。
 
-----
+---
+
 Ptt Alertor 免費、無廣告、未營利，請安心使用。

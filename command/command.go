@@ -57,7 +57,7 @@ var Commands = map[string]map[string]string{
 	"推文相關": {
 		"新增推文 網址": "新增推文追蹤",
 		"刪除推文 網址": "刪除推文追蹤",
-		"範例":      "新增推文 https://www.ptt.cc/bbs/EZsoft/M.1497363598.A.74E.html",
+		"範例":      "新增推文 https://www.ptt.cc/bbs/EZsoft/M.1708247900.A.27C.html",
 	},
 	"進階應用": {
 		"參考連結": "https://ptt-alertor.tiaui.co/docs",
@@ -157,7 +157,7 @@ func HandleCommand(text string, userID string, isUser bool) string {
 				"1. 網址與指令需至少一個空白。",
 				"2. 網址錯誤格式。",
 				"正確範例：",
-				command + " https://www.ptt.cc/bbs/EZsoft/M.1497363598.A.74E.html",
+				command + " https://www.ptt.cc/bbs/EZsoft/M.1708247900.A.27C.html",
 			}
 			return strings.Join(errorTips, "\n")
 		}
