@@ -1,8 +1,8 @@
-module github.com/Ptt-Alertor/ptt-alertor
+module github.com/watain666/ptt-alertor
 
-go 1.21
+go 1.26
 
-toolchain go1.22.0
+toolchain go1.26.2
 
 require (
 	github.com/Ptt-Alertor/logrus v0.0.0-20170625191354-a4db038e018c
@@ -12,7 +12,6 @@ require (
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible
 	github.com/google/gops v0.3.28
 	github.com/julienschmidt/httprouter v0.0.0-20170104185816-8a45e95fc75c
-	github.com/line/line-bot-sdk-go v7.8.0+incompatible
 	github.com/mmcdole/gofeed v0.0.0-20170307182009-042c0a912158
 	github.com/robfig/cron v0.0.0-20160927164231-9585fd555638
 	golang.org/x/net v0.20.0

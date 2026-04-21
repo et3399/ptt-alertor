@@ -25,8 +25,6 @@ github.com/julienschmidt/httprouter v0.0.0-20170104185816-8a45e95fc75c h1:7iC/gG
 github.com/julienschmidt/httprouter v0.0.0-20170104185816-8a45e95fc75c/go.mod h1:SYymIcj16QtmaHHD7aYtjjsJG7VTCxuUUipMqKk8s4w=
 github.com/lib/pq v1.10.9 h1:YXG7RB+JIjhP29X+OtkiDnYaXQwpS4JEWq7dtCCRUEw=
 github.com/lib/pq v1.10.9/go.mod h1:AlVN5x4E4T544tWzH6hKfbfQvm3HdbOxrmggDNAPY9o=
-github.com/line/line-bot-sdk-go v7.8.0+incompatible h1:Uf9/OxV0zCVfqyvwZPH8CrdiHXXmMRa/L91G3btQblQ=
-github.com/line/line-bot-sdk-go v7.8.0+incompatible/go.mod h1:0RjLjJEAU/3GIcHkC3av6O4jInAbt25nnZVmOFUgDBg=
 github.com/mmcdole/gofeed v0.0.0-20170307182009-042c0a912158 h1:4f+crgz25c4qbXMTBWtS3HO4Us33mQcZvSkuCvcjGOs=
 github.com/mmcdole/gofeed v0.0.0-20170307182009-042c0a912158/go.mod h1:/BF9JneEL2/flujm8XHoxUcghdTV6vvb3xx/vKyChFU=
 github.com/mmcdole/goxpp v0.0.0-20160419160217-e38884aa48c1 h1:uVhXwzNiHeS16GSJ5XUysvKi0kRf5D26HXuLwP4tVOc=
