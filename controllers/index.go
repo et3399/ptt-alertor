@@ -9,12 +9,12 @@ import (
 
 	"strings"
 
-	"github.com/Ptt-Alertor/ptt-alertor/connections"
-	"github.com/Ptt-Alertor/ptt-alertor/models/counter"
-	"github.com/Ptt-Alertor/ptt-alertor/models/top"
-	"github.com/Ptt-Alertor/ptt-alertor/shorturl"
 	"github.com/garyburd/redigo/redis"
 	"github.com/julienschmidt/httprouter"
+	"github.com/watain666/ptt-alertor/connections"
+	"github.com/watain666/ptt-alertor/models/counter"
+	"github.com/watain666/ptt-alertor/models/top"
+	"github.com/watain666/ptt-alertor/shorturl"
 	"golang.org/x/net/websocket"
 
 	"github.com/russross/blackfriday"
@@ -25,7 +25,6 @@ var tpls = []string{
 	"public/top.html",
 	"public/telegram.html",
 	"public/messenger.html",
-	"public/line.html",
 	"public/tpls/head.tpl",
 	"public/tpls/header.tpl",
 	"public/tpls/slogan.tpl",
@@ -48,20 +47,7 @@ var (
 
 // Index Handles router "/" request
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	LineIndex(w, r, nil)
-}
-
-// LineIndex Handles router "/line" request
-func LineIndex(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	err := templates.ExecuteTemplate(w, "line.html", struct {
-		URI      string
-		WSHost   string
-		Count    []string
-		S3Domain string
-	}{"line", wsHost, count(), s3Domain})
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	TelegramIndex(w, r, nil)
 }
 
 // MessengerIndex Handles router "/messenger" request

@@ -152,7 +152,7 @@ https://media.giphy.com/media/l0IymluZkRkSDPDZ6/giphy.gif
 
 Messenger: http://m.me/pttalertor
 
-LINE: https://line.me/R/ti/p/%40vxl5146r
+Telegram: https://t.me/PttAlertorTiauiBot
 
 ## 官方網站：
 

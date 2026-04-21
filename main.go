@@ -12,11 +12,10 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/robfig/cron"
 
-	"github.com/Ptt-Alertor/ptt-alertor/channels/line"
-	"github.com/Ptt-Alertor/ptt-alertor/channels/messenger"
-	"github.com/Ptt-Alertor/ptt-alertor/channels/telegram"
-	ctrlr "github.com/Ptt-Alertor/ptt-alertor/controllers"
-	"github.com/Ptt-Alertor/ptt-alertor/jobs"
+	"github.com/watain666/ptt-alertor/channels/messenger"
+	"github.com/watain666/ptt-alertor/channels/telegram"
+	ctrlr "github.com/watain666/ptt-alertor/controllers"
+	"github.com/watain666/ptt-alertor/jobs"
 )
 
 var (
@@ -67,8 +66,8 @@ func main() {
 
 	router.GET("/", ctrlr.Index)
 	// router.GET("/messenger", ctrlr.MessengerIndex)
-	router.GET("/line", ctrlr.LineIndex)
-	// router.GET("/telegram", ctrlr.TelegramIndex)
+	router.GET("/telegram", ctrlr.TelegramIndex)
+	router.GET("/messenger", ctrlr.MessengerIndex)
 	router.GET("/redirect/:checksum", ctrlr.Redirect)
 	router.GET("/top", ctrlr.Top)
 	router.GET("/docs", ctrlr.Docs)
@@ -100,10 +99,6 @@ func main() {
 	router.GET("/users", basicAuth(ctrlr.UserAll))
 	router.POST("/users", basicAuth(ctrlr.UserCreate))
 	router.PUT("/users/:account", basicAuth(ctrlr.UserModify))
-
-	// line
-	router.POST("/line/callback", line.HandleRequest)
-	router.POST("/line/notify/callback", line.CatchCallback)
 
 	// facebook messenger
 	router.GET("/messenger/webhook", m.Verify)

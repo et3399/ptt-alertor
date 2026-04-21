@@ -6,10 +6,10 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/Ptt-Alertor/ptt-alertor/models"
-	"github.com/Ptt-Alertor/ptt-alertor/models/user"
-	"github.com/Ptt-Alertor/ptt-alertor/myutil"
 	"github.com/julienschmidt/httprouter"
+	"github.com/watain666/ptt-alertor/models"
+	"github.com/watain666/ptt-alertor/models/user"
+	"github.com/watain666/ptt-alertor/myutil"
 )
 
 func UserFind(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
@@ -25,7 +25,7 @@ func UserAll(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	us := models.User().All()
 
 	data := struct {
-		Total, Line, Messenger, Telegram, IdleUser, BlockUser         int
+		Total, Messenger, Telegram, IdleUser, BlockUser               int
 		SubCount, BoardCount, KeywordCount, AuthorCount, PushSumCount int
 		User, Room, Group                                             int
 		Users                                                         []*user.User
@@ -35,9 +35,6 @@ func UserAll(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	for _, u := range us {
 		if !u.Enable {
 			data.BlockUser++
-		}
-		if u.Profile.Line != "" {
-			data.Line++
 		}
 		if u.Profile.Messenger != "" {
 			data.Messenger++

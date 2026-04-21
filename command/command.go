@@ -8,18 +8,18 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Ptt-Alertor/ptt-alertor/models"
-	"github.com/Ptt-Alertor/ptt-alertor/myutil"
-	"github.com/Ptt-Alertor/ptt-alertor/ptt/web"
+	"github.com/watain666/ptt-alertor/models"
+	"github.com/watain666/ptt-alertor/myutil"
+	"github.com/watain666/ptt-alertor/ptt/web"
 
 	"fmt"
 
 	log "github.com/Ptt-Alertor/logrus"
-	"github.com/Ptt-Alertor/ptt-alertor/models/article"
-	"github.com/Ptt-Alertor/ptt-alertor/models/board"
-	"github.com/Ptt-Alertor/ptt-alertor/models/subscription"
-	"github.com/Ptt-Alertor/ptt-alertor/models/top"
-	"github.com/Ptt-Alertor/ptt-alertor/models/user"
+	"github.com/watain666/ptt-alertor/models/article"
+	"github.com/watain666/ptt-alertor/models/board"
+	"github.com/watain666/ptt-alertor/models/subscription"
+	"github.com/watain666/ptt-alertor/models/top"
+	"github.com/watain666/ptt-alertor/models/user"
 )
 
 const subArticlesLimit int = 50
@@ -60,7 +60,7 @@ var Commands = map[string]map[string]string{
 		"範例":      "新增推文 https://www.ptt.cc/bbs/EZsoft/M.1497363598.A.74E.html",
 	},
 	"進階應用": {
-		"參考連結": "https://line-notify.sating.cc/docs",
+		"參考連結": "https://ptt-alertor.tiaui.co/docs",
 	},
 }
 
@@ -335,7 +335,7 @@ func listTop() string {
 	for i, pushSum := range top.ListPushSum(5) {
 		content += fmt.Sprintf("\n%d. %s", i+1, pushSum)
 	}
-	content += "\n\nTOP 100:\nhttps://line-notify.sating.cc/top"
+	content += "\n\nTOP 100:\nhttps://ptt-alertor.tiaui.co/top"
 	return content
 }
 
@@ -542,17 +542,6 @@ func update(action updateAction, account string, boardNames []string, inputs ...
 	return nil
 }
 
-func HandleLineFollow(id, accountType string) error {
-	u := models.User().Find(id)
-	u.Profile.Line, u.Profile.Type = id, accountType
-	log.WithFields(log.Fields{
-		"id":       id,
-		"type":     accountType,
-		"platform": "line",
-	}).Info("User Join")
-	return handleFollow(u)
-}
-
 func HandleMessengerFollow(id string) error {
 	u := models.User().Find(id)
 	u.Profile.Messenger = id
@@ -581,9 +570,6 @@ func handleFollow(u user.User) error {
 	} else {
 		if u.Profile.Messenger != "" {
 			u.Profile.Account = u.Profile.Messenger
-		}
-		if u.Profile.Line != "" {
-			u.Profile.Account = u.Profile.Line
 		}
 		if u.Profile.Telegram != "" {
 			u.Profile.Account = u.Profile.Telegram

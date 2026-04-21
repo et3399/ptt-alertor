@@ -4,7 +4,7 @@
 
 下載連結：
 
-LINE Bot: https://line.me/R/ti/p/%40vxl5146r
+Telegram Bot: https://t.me/PttAlertorTiauiBot
 
 Messenger Bot: https://m.me/pttalertor
 
