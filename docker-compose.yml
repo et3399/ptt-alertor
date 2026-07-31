@@ -58,18 +58,14 @@ services:
     depends_on:
       - dynamodb-local
     volumes:
+volumes:
       - ./docker/init-dynamodb.sh:/init-dynamodb.sh:ro
-    # 修正 entrypoint 使用 bash，并在执行初始化脚本前循环等待 dynamodb-local 就绪
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        echo "Waiting for DynamoDB Local to be ready..."
-        until aws dynamodb list-tables --endpoint-url http://dynamodb-local:8000 --region ${AWS_REGION:-us-west-2} > /dev/null 2>&1; do
-          sleep 2
-        done
-        echo "DynamoDB Local is ready. Executing initialization script..."
-        bash /init-dynamodb.sh
+    # 采用安全单行语法：先轮询等待 dynamodb-local 响应 200，再执行初始化脚本
+    entrypoint: >
+      /bin/bash -c "echo 'Waiting for DynamoDB...';
+      until aws dynamodb list-tables --endpoint-url http://dynamodb-local:8000 --region ${AWS_REGION:-us-west-2} >/dev/null 2>&1; do sleep 2; done;
+      echo 'DynamoDB Ready!';
+      bash /init-dynamodb.sh"
 
 volumes:
   redis-data:
