@@ -61,7 +61,7 @@ services:
       - dynamodb-local
     volumes:
       - ./docker/init-dynamodb.sh:/init-dynamodb.sh:ro
-    entrypoint: ["/bin/sh", "/init-dynamodb.sh"]
+    entrypoint: ["/bin/bash", "/init-dynamodb.sh"]
 
 volumes:
   redis-data:
