@@ -44,6 +44,8 @@ services:
   dynamodb-local:
     image: amazon/dynamodb-local:2.5.2
     command: ["-jar", "DynamoDBLocal.jar", "-sharedDb"]
+    ports:
+      - "4020:8000"
     restart: unless-stopped
 
   dynamodb-init:
@@ -58,14 +60,8 @@ services:
     depends_on:
       - dynamodb-local
     volumes:
-volumes:
       - ./docker/init-dynamodb.sh:/init-dynamodb.sh:ro
-    # 采用安全单行语法：先轮询等待 dynamodb-local 响应 200，再执行初始化脚本
-    entrypoint: >
-      /bin/bash -c "echo 'Waiting for DynamoDB...';
-      until aws dynamodb list-tables --endpoint-url http://dynamodb-local:8000 --region ${AWS_REGION:-us-west-2} >/dev/null 2>&1; do sleep 2; done;
-      echo 'DynamoDB Ready!';
-      bash /init-dynamodb.sh"
+    entrypoint: ["/bin/sh", "/init-dynamodb.sh"]
 
 volumes:
   redis-data:
