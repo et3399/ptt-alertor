@@ -44,8 +44,6 @@ services:
   dynamodb-local:
     image: amazon/dynamodb-local:2.5.2
     command: ["-jar", "DynamoDBLocal.jar", "-sharedDb"]
-    #ports:
-    #  - "8000:8000"
     restart: unless-stopped
 
   dynamodb-init:
