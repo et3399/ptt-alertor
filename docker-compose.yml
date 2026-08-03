@@ -6,7 +6,8 @@ services:
     environment:
       REDIS_ENDPOINT: ${REDIS_ENDPOINT:-redis}
       REDIS_PORT: ${REDIS_PORT:-6379}
-      DB_CONNECTION: ${DB_CONNECTION:-http://dynamodb-local:8000}
+      # 内部 Docker 网络连向 scylla:8000
+      DB_CONNECTION: ${DB_CONNECTION:-http://scylla:8000}
       AWS_REGION: ${AWS_REGION:-us-west-2}
       APP_HOST: ${APP_HOST:-http://localhost:9090}
       APP_WS_HOST: ${APP_WS_HOST:-ws://localhost:9090/ws}
@@ -41,11 +42,19 @@ services:
       - redis-data:/data
     restart: unless-stopped
 
-  dynamodb-local:
-    image: amazon/dynamodb-local:2.5.2
-    command: ["-jar", "DynamoDBLocal.jar", "-sharedDb"]
+  scylla:
+    image: scylladb/scylla:latest
+    # --alternator-port=8000 开启 DynamoDB 兼容模式
+    # --smp 1 --memory 768M 限制内存和 CPU，防止吃满 VPS
+    command: >
+      --alternator-port=8000
+      --alternator-write-isolation=always
+      --smp 1
+      --memory 768M
     ports:
-      - "4020:8000"
+      - "4020:8000"  # 保持你原本对外的 4020 端口映射
+    volumes:
+      - scylla-data:/var/lib/scylla  # 数据库文件落盘持久化
     restart: unless-stopped
 
   dynamodb-init:
@@ -53,15 +62,17 @@ services:
     env_file:
       - .env
     environment:
-      DB_CONNECTION: ${DB_CONNECTION:-http://dynamodb-local:8000}
+      # 内部指向 scylla 服务
+      DB_CONNECTION: ${DB_CONNECTION:-http://scylla:8000}
       AWS_REGION: ${AWS_REGION:-us-west-2}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-local}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-local}
     depends_on:
-      - dynamodb-local
+      - scylla
     volumes:
       - ./docker/init-dynamodb.sh:/init-dynamodb.sh:ro
     entrypoint: ["/bin/bash", "/init-dynamodb.sh"]
 
 volumes:
   redis-data:
+  scylla-data:  # 新增数据库持久化卷
