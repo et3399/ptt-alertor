@@ -44,17 +44,13 @@ services:
 
   scylla:
     image: scylladb/scylla:latest
-    # --alternator-port=8000 开启 DynamoDB 兼容模式
-    # --smp 1 --memory 768M 限制内存和 CPU，防止吃满 VPS
-    command: >
-      --alternator-port=8000
-      --alternator-write-isolation=always
-      --smp 1
-      --memory 768M
+    command:
+      - --alternator-port=8000
+      - --alternator-write-isolation=always
     ports:
-      - "4020:8000"  # 保持你原本对外的 4020 端口映射
+      - "4020:8000"
     volumes:
-      - scylla-data:/var/lib/scylla  # 数据库文件落盘持久化
+      - scylla-data:/var/lib/scylla
     restart: unless-stopped
 
   dynamodb-init:
